@@ -1,3 +1,5 @@
+import { REQUEST_STATE, USER_ACTION_TYPE } from './const';
+
 export default {
   user: {
     type: 'reviewer',
@@ -6,10 +8,10 @@ export default {
     {
       id: 1,
       consortium: 'INSTRuCT',
-      state: 'under review',
+      state: REQUEST_STATE.UNDER_REVIEW,
       submitted_at: '2021-02-09 17:13:29',
       completed_at: '',
-      attributes: [
+      attributes /** @type {Attribute[]} */: [
         {
           id: 0,
           name: 'Attribute X',
@@ -25,10 +27,14 @@ export default {
           optional: false,
         },
       ],
-      available_user_actions: ['REQUEST_UPDATE', 'ACCEPT', 'REJECT'],
+      available_user_actions: [
+        USER_ACTION_TYPE.REQUEST_UPDATE,
+        USER_ACTION_TYPE.APPROVE,
+        USER_ACTION_TYPE.REJECT,
+      ],
       project: {
         id: 1,
-        title: 'Research project 1',
+        name: 'Research project 1',
         description: "Jane's another awesome research project.",
       },
       researcher: {
@@ -40,10 +46,10 @@ export default {
     {
       id: 2,
       consortium: 'INSTRuCT',
-      state: 'under review',
+      state: REQUEST_STATE.UNDER_REVIEW,
       submitted_at: '2021-02-19 17:13:29',
       completed_at: '',
-      attributes: [
+      attributes /** @type {Attribute[]} */: [
         {
           id: 0,
           name: 'Attribute X',
@@ -59,10 +65,14 @@ export default {
           optional: false,
         },
       ],
-      available_user_actions: ['REQUEST_UPDATE', 'ACCEPT', 'REJECT'],
+      available_user_actions: [
+        USER_ACTION_TYPE.REQUEST_UPDATE,
+        USER_ACTION_TYPE.APPROVE,
+        USER_ACTION_TYPE.REJECT,
+      ],
       project: {
         id: 3,
-        title: 'Research project 3',
+        name: 'Research project 3',
         description: "Richard's awesome research project.",
       },
       researcher: {

@@ -1,3 +1,5 @@
+import { REQUEST_STATE, USER_ACTION_TYPE } from './const';
+
 export default {
   user: {
     type: 'researcher',
@@ -17,10 +19,10 @@ export default {
         {
           id: 0,
           consortium: 'INSTRuCT',
-          state: 'not submitted',
+          state: REQUEST_STATE.NOT_SUBMITTED,
           submitted_at: '',
           completed_at: '',
-          attributes: [
+          attribute: [
             {
               id: 0,
               name: 'Attribute X',
@@ -36,7 +38,7 @@ export default {
               optional: false,
             },
           ],
-          available_user_actions: ['SUBMIT'],
+          available_user_actions: [USER_ACTION_TYPE.SUBMIT],
         },
       ],
       searches: [
@@ -62,7 +64,7 @@ export default {
         {
           id: 1,
           consortium: 'INSTRuCT',
-          state: 'under review',
+          state: REQUEST_STATE.UNDER_REVIEW,
           submitted_at: '2021-02-09 17:13:29',
           completed_at: '',
           attributes: [
@@ -81,7 +83,7 @@ export default {
               optional: false,
             },
           ],
-          available_user_actions: [''],
+          available_user_actions: [],
         },
       ],
       searches: [
