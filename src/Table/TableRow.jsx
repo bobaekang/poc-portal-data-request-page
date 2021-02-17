@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Table.less';
+import './Table.css';
 
 class TableRow extends Component {
   renderCols = (cols) =>
     cols.map((col, i) => (
-      <td className='base-table__cell' key={`col_${i}`}>
+      <td className="base-table__cell" key={`col_${i}`}>
         {col}
       </td>
     ));
 
   render() {
     return (
-      <tr className='base-table__row base-table__row--stripe-color'>
+      <tr className="base-table__row base-table__row--stripe-color">
         {this.renderCols(this.props.cols)}
       </tr>
     );
