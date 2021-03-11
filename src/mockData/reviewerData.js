@@ -38,6 +38,7 @@ export default {
         description: "Jane's another awesome research project.",
       },
       researcher: {
+        id: 0,
         first_name: 'Jane',
         last_name: 'Doe',
         institution: 'University of Chicago',
@@ -76,6 +77,7 @@ export default {
         description: "Richard's awesome research project.",
       },
       researcher: {
+        id: 1,
         first_name: 'Richard',
         last_name: 'Roe',
         institution: 'University of Chicago',
