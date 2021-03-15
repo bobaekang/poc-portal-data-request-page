@@ -1,0 +1,48 @@
+.data-request {
+  width: 100%;
+}
+
+.data-request__header {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.data-request__header__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.data-request__header__button {
+  margin: 0.5rem 1rem;
+}
+
+.data-request__header__date {
+  font-size: 0.8rem;
+  color: grey;
+  font-style: italic;
+}
+
+.data-request__body {
+  width: 100%;
+}
+
+.data-request-form {
+  display: flex;
+}
+
+.data-request-form__main,
+.data-request-form__extra {
+  width: 50%;
+  padding: 0 4rem;
+}
+
+.data-request-form__button-group {
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
+}
+
+.data-request-form__button-group > button {
+  margin: 0 0.5rem;
+}
