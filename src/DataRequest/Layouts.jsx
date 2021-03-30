@@ -20,7 +20,10 @@ function BaseLayout({ header, body }) {
 
 BaseLayout.propTypes = {
   header: PropTypes.node,
-  body: PropTypes.node,
+  body: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 /**
@@ -54,7 +57,10 @@ TableLayout.propTypes = {
     title: PropTypes.string,
     showRequestButton: PropTypes.bool,
   }).isRequired,
-  children: PropTypes.node,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 /**
@@ -95,5 +101,8 @@ FormLayout.propTypes = {
       completedAt: PropTypes.string,
     }),
   }).isRequired,
-  children: PropTypes.node,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
