@@ -182,6 +182,9 @@ export function UpdateResearchForm({ data }) {
     name: data.name,
     description: data.description,
   });
+  const searchValues = [];
+  for (const { name } of data.searches)
+    searchValues.push({ label: name, value: name });
   const isSubmitAllowed =
     isEditable &&
     (projectData.name !== data.name ||
@@ -222,6 +225,32 @@ export function UpdateResearchForm({ data }) {
                     }))
                   }
                 />
+              }
+            />
+            <SimpleInputField
+              label="Research Cohort"
+              input={
+                <>
+                  <Select
+                    menuIsOpen={false}
+                    components={{
+                      DropdownIndicator: () => null,
+                      IndicatorSeparator: () => null,
+                    }}
+                    isClearable={false}
+                    isMulti
+                    isSearchable={false}
+                    value={searchValues}
+                    styles={{
+                      multiValueLabel: (base) => {
+                        return { ...base, paddingRight: 6 };
+                      },
+                      multiValueRemove: (base) => {
+                        return { ...base, display: 'none' };
+                      },
+                    }}
+                  />
+                </>
               }
             />
           </form>
