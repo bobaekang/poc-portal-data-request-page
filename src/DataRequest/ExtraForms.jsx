@@ -56,18 +56,7 @@ export function CohortAddForm({ cohorts, onAddCohort, onClose }) {
   }
   return (
     <ExtraFormLayout title="Select a saved Cohort to add" onClose={onClose}>
-      <form
-        onKeyDown={(e) => {
-          e.preventDefault();
-          switch (e.key) {
-            case 'Enter':
-              isAddAllowed && handleAddCohort();
-              break;
-            case 'Escape':
-              onClose();
-          }
-        }}
-      >
+      <form onSubmit={(e) => e.preventDefault()}>
         <SimpleInputField
           label="Name"
           input={
@@ -140,7 +129,7 @@ export function CohortDetailsForm({ cohorts, onClose }) {
 
   return (
     <ExtraFormLayout title="Details on a selected Cohort" onClose={onClose}>
-      <form onKeyDown={(e) => e.preventDefault()}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <SimpleInputField
           label="Name"
           input={
