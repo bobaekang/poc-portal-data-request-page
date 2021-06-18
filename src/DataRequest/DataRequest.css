@@ -69,9 +69,21 @@
 }
 
 .data-request-form__input__action {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.data-request-form__input__action-button {
+  border: none;
+  color: var(--g3-color__gray);
+  height: auto;
+  width: auto;
   text-decoration: underline;
-  cursor: pointer;
+}
+
+.data-request-form__input__action-button:after {
+  content: ' →';
 }
 
 .data-request-overlay {

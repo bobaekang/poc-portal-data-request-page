@@ -104,11 +104,13 @@ export function CreateResearchForm({ cohorts }) {
                     }
                   }}
                 />
-                <div
-                  className="data-request-form__input__action"
-                  onClick={() => setShowExtra(true)}
-                >
-                  Add Cohort →
+                <div className="data-request-form__input__action">
+                  <button
+                    className="data-request-form__input__action-button"
+                    onClick={() => setShowExtra(true)}
+                  >
+                    Add Cohort
+                  </button>
                 </div>
               </>
             }
