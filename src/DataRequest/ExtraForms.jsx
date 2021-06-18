@@ -63,7 +63,6 @@ export function CohortAddForm({ cohorts, onAddCohort, onClose }) {
             <Select
               options={[emptyOption, ...options]}
               value={selected}
-              autoFocus
               clearable={false}
               onChange={(e) => setSelected(e)}
             />
@@ -136,7 +135,6 @@ export function CohortDetailsForm({ cohorts, onClose }) {
             <Select
               options={options}
               value={selected}
-              autoFocus
               clearable={false}
               onChange={(e) => setSelected(e)}
             />
