@@ -74,6 +74,9 @@ function App() {
         <Route path="/">
           <DataRequest user={user} data={data} />
         </Route>
+        <Route path="*">
+          <Redirect to="/" />
+        </Route>
       </Switch>
     </div>
   );
