@@ -5,7 +5,7 @@ import Select from 'react-select';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
 import { FormLayout } from './Layouts';
-import { CohortExtraForm } from './ExtraForms';
+import { CohortExtraForm, CohortDetailsForm } from './ExtraForms';
 import { combineRequestsInfo } from './utils';
 import './typedef';
 
@@ -183,8 +183,13 @@ export function UpdateResearchForm({ data }) {
     description: data.description,
   });
   const searchValues = [];
-  for (const { name } of data.searches)
-    searchValues.push({ label: name, value: name });
+  const cohorts = /**  @type {ExplorerCohort} */ [];
+  for (const search of data.searches) {
+    searchValues.push({ label: search.name, value: search.name });
+    cohorts.push({ ...search, filters: JSON.parse(search.filters) });
+  }
+  const [showCohortDetail, setShowCohortDetail] = useState(false);
+
   const isSubmitAllowed =
     isEditable &&
     (projectData.name !== data.name ||
@@ -250,6 +255,17 @@ export function UpdateResearchForm({ data }) {
                       },
                     }}
                   />
+                  <div className="data-request-form__input__action">
+                    <button
+                      className="data-request-form__input__action-button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowCohortDetail(true);
+                      }}
+                    >
+                      See Details
+                    </button>
+                  </div>
                 </>
               }
             />
@@ -265,6 +281,17 @@ export function UpdateResearchForm({ data }) {
           </div>
         </div>
       </div>
+      {showCohortDetail && (
+        <div
+          className="data-request-overlay"
+          style={{ justifyContent: 'right' }}
+        >
+          <CohortDetailsForm
+            cohorts={cohorts}
+            onClose={() => setShowCohortDetail(false)}
+          />
+        </div>
+      )}
     </FormLayout>
   );
 }
