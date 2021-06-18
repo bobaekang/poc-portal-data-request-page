@@ -130,7 +130,7 @@ export function CreateResearchForm({ cohorts }) {
       {showExtra && (
         <div
           className="data-request-overlay"
-          style={{ justifyContent: 'right' }}
+          style={{ justifyContent: 'flex-end' }}
         >
           <CohortAddForm
             cohorts={cohorts.filter((cohort) => {
@@ -284,7 +284,7 @@ export function UpdateResearchForm({ data }) {
       {showCohortDetail && (
         <div
           className="data-request-overlay"
-          style={{ justifyContent: 'right' }}
+          style={{ justifyContent: 'flex-end' }}
         >
           <CohortDetailsForm
             cohorts={cohorts}
