@@ -75,8 +75,10 @@
 }
 
 .data-request-form__input__action-button {
+  background: none;
   border: none;
   color: var(--g3-color__gray);
+  font-weight: normal;
   height: auto;
   width: auto;
   text-decoration: underline;
