@@ -10,8 +10,12 @@ import mockData from './mockData';
 import './App.css';
 
 function App() {
-  /** @type {{ researcherData: any; reviewerData: any }} */
-  const { researcherData, reviewerData } = mockData;
+  /** @type {{ cohorts: any; researcherData: any; reviewerData: any }} */
+  const { cohorts, researcherData, reviewerData } = mockData;
+  const parsedCohorts = cohorts.map((cohort) => ({
+    ...cohort,
+    filters: JSON.parse(cohort.filters),
+  }));
 
   const [userType, setUserType] = useState('researcher');
   let user, data;
@@ -50,7 +54,7 @@ function App() {
           path="/research-projects"
           render={() =>
             userType === 'researcher' ? (
-              <CreateResearchForm />
+              <CreateResearchForm cohorts={parsedCohorts} />
             ) : (
               <Redirect to="/" />
             )

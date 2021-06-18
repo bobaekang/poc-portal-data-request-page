@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import Select from 'react-select';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
 import { FormLayout } from './Layouts';
+import { CohortExtraForm } from './ExtraForms';
 import { combineRequestsInfo } from './utils';
 import './typedef';
 
@@ -12,9 +14,10 @@ import './typedef';
  * @property {number} id
  * @property {string} name
  * @property {string} description
+ * @property {ExplorerCohort[]} cohorts
  */
 
-export function CreateResearchForm() {
+export function CreateResearchForm({ cohorts }) {
   const history = useHistory();
   const handleBack = () => history.push('/');
 
@@ -25,10 +28,19 @@ export function CreateResearchForm() {
   const [projectData, setProjectData] = useState({
     name: '',
     description: '',
+    searchIds: [],
   });
+  const searchValues = [];
+  for (const { id, name } of cohorts)
+    for (const searchId of projectData.searchIds)
+      if (id === searchId) searchValues.push({ label: name, value: id });
   const isCreateAllowed =
-    projectData.name !== '' && projectData.description !== '';
+    projectData.name !== '' &&
+    projectData.description !== '' &&
+    projectData.searchIds.length > 0;
   const handleProjectCreate = () => alert(JSON.stringify(projectData, null, 2));
+
+  const [showExtra, setShowExtra] = useState(false);
 
   return (
     <FormLayout header={layoutHeader}>
@@ -63,6 +75,45 @@ export function CreateResearchForm() {
               />
             }
           />
+          <SimpleInputField
+            label="Research Cohort"
+            input={
+              <>
+                <Select
+                  menuIsOpen={false}
+                  components={{
+                    DropdownIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                  }}
+                  isMulti
+                  isClearable
+                  isSearchable={false}
+                  value={searchValues}
+                  onChange={(_, actionMeta) => {
+                    switch (actionMeta.action) {
+                      case 'clear':
+                        setProjectData((prev) => ({ ...prev, searchIds: [] }));
+                        break;
+                      case 'remove-value':
+                        setProjectData((prev) => ({
+                          ...prev,
+                          searchIds: prev.searchIds.filter(
+                            (id) => id !== actionMeta.removedValue.value,
+                          ),
+                        }));
+                    }
+                  }}
+                />
+                <div
+                  className="data-request-form__input__action"
+                  onClick={() => setShowExtra(true)}
+                >
+                  Add Cohort →
+                </div>
+              </>
+            }
+          />
+
           <div className="data-request-form__button-group">
             <Button label="Back" buttonType="default" onClick={handleBack} />
             <Button
@@ -74,6 +125,27 @@ export function CreateResearchForm() {
           </div>
         </div>
       </div>
+      {showExtra && (
+        <div
+          className="data-request-overlay"
+          style={{ justifyContent: 'right' }}
+        >
+          <CohortExtraForm
+            cohorts={cohorts.filter((cohort) => {
+              for (const id of projectData.searchIds)
+                if (id === cohort.id) return false;
+              return true;
+            })}
+            onAddCohort={(id) =>
+              setProjectData((prev) => ({
+                ...prev,
+                searchIds: [...prev.searchIds, id],
+              }))
+            }
+            onClose={() => setShowExtra(false)}
+          />
+        </div>
+      )}
     </FormLayout>
   );
 }
