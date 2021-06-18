@@ -38,7 +38,7 @@ ExtraFormLayout.propTypes = {
  * @param {(id: number) => void} prop.onAddCohort
  * @param {() => void} prop.onClose
  */
-export function CohortExtraForm({ cohorts, onAddCohort, onClose }) {
+export function CohortAddForm({ cohorts, onAddCohort, onClose }) {
   const emptyOption = {
     label: 'Open New (no cohort)',
     value: createEmptyCohort(),
@@ -113,7 +113,7 @@ export function CohortExtraForm({ cohorts, onAddCohort, onClose }) {
   );
 }
 
-CohortExtraForm.propTypes = {
+CohortAddForm.propTypes = {
   cohorts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

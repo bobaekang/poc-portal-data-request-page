@@ -5,7 +5,7 @@ import Select from 'react-select';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
 import { FormLayout } from './Layouts';
-import { CohortExtraForm, CohortDetailsForm } from './ExtraForms';
+import { CohortAddForm, CohortDetailsForm } from './ExtraForms';
 import { combineRequestsInfo } from './utils';
 import './typedef';
 
@@ -132,7 +132,7 @@ export function CreateResearchForm({ cohorts }) {
           className="data-request-overlay"
           style={{ justifyContent: 'right' }}
         >
-          <CohortExtraForm
+          <CohortAddForm
             cohorts={cohorts.filter((cohort) => {
               for (const id of projectData.searchIds)
                 if (id === cohort.id) return false;
