@@ -55,7 +55,12 @@
   position: absolute;
   right: 1rem;
   top: 1rem;
-  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--g3-color__gray);
+  font-weight: normal;
+  height: auto;
+  width: auto;
 }
 
 .data-request-form__button-group {

@@ -14,9 +14,9 @@ import { createEmptyCohort, stringifyFilters } from '../ExplorerCohort/utils';
 function ExtraFormLayout({ title, children, onClose }) {
   return (
     <div className="data-request-form__extra">
-      <span className="data-request-form__extra__close" onClick={onClose}>
+      <button className="data-request-form__extra__close" onClick={onClose}>
         ✕
-      </span>
+      </button>
       <h2 className="data-request-form__extra__title">{title}</h2>
       {children}
     </div>
