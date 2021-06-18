@@ -85,6 +85,30 @@ export default {
           ],
           available_user_actions: [],
         },
+        {
+          id: 2,
+          consortium: 'COG',
+          state: REQUEST_STATE.UPDATE_REQUESTED,
+          submitted_at: '2021-02-09 17:13:29',
+          completed_at: '',
+          attributes: [
+            {
+              id: 2,
+              name: 'Attribute α',
+              type: 'text',
+              value: 'lorem',
+              optional: false,
+            },
+            {
+              id: 3,
+              name: 'Attribute β',
+              type: 'text',
+              value: 'ipsum',
+              optional: false,
+            },
+          ],
+          available_user_actions: [USER_ACTION_TYPE.SUBMIT],
+        },
       ],
       searches: [
         {
