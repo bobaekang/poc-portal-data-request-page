@@ -22,7 +22,7 @@ export default {
           state: REQUEST_STATE.NOT_SUBMITTED,
           submitted_at: '',
           completed_at: '',
-          attribute: [
+          attributes: [
             {
               id: 0,
               name: 'Attribute X',
