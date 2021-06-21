@@ -81,6 +81,13 @@
   width: auto;
 }
 
+.data-request-form__extra__body {
+  min-height: calc(400px - 4rem - 38px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .data-request-form__button-group {
   display: flex;
   justify-content: center;

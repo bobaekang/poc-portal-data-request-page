@@ -18,7 +18,7 @@ function ExtraFormLayout({ title, children, onClose }) {
         ✕
       </button>
       <h2 className="data-request-form__extra__title">{title}</h2>
-      {children}
+      <div className="data-request-form__extra__body">{children}</div>
     </div>
   );
 }
