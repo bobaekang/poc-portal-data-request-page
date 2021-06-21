@@ -176,3 +176,66 @@ CohortDetailsForm.propTypes = {
   ),
   onClose: PropTypes.func,
 };
+
+/**
+ * @param {object} prop
+ * @param {DataRequest} prop.request
+ * @param {() => void} prop.onClose
+ * @param {(attributes: *) => void} prop.onSubmit
+ */
+export function ConsortiumRequestForm({ request, onClose, onSubmit }) {
+  const initialValues = {};
+  for (const { id, value } of request.attributes) initialValues[id] = value;
+  const [values, setValues] = useState(initialValues);
+
+  const isEditable = request.state === 'UPDATE_REQUESTED';
+  const changedAttributes = [];
+  if (isEditable)
+    for (const [id, value] of Object.entries(values))
+      if (initialValues[id] !== value) changedAttributes.push({ id, value });
+
+  function handleSubmitChange() {
+    onSubmit(changedAttributes);
+    onClose();
+  }
+  return (
+    <ExtraFormLayout
+      title={`Data Request to ${request.consortium}`}
+      onClose={onClose}
+    >
+      <form onSubmit={(e) => e.preventDefault()}>
+        {request.attributes.map((attr) => (
+          <SimpleInputField
+            key={attr.name}
+            label={attr.name}
+            input={
+              <input
+                value={values[attr.id]}
+                disabled={!isEditable}
+                onChange={(e) =>
+                  setValues((prev) => ({ ...prev, [attr.id]: e.target.value }))
+                }
+              />
+            }
+          />
+        ))}
+      </form>
+      {isEditable && (
+        <div className="data-request-form__button-group">
+          <Button
+            buttonType="primary"
+            enabled={changedAttributes.length > 0}
+            label="Submit Change"
+            onClick={handleSubmitChange}
+          />
+        </div>
+      )}
+    </ExtraFormLayout>
+  );
+}
+
+ConsortiumRequestForm.propTypes = {
+  request: PropTypes.object,
+  onClose: PropTypes.func,
+  onSubmit: PropTypes.func,
+};
