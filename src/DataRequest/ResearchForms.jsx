@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
 import { FormLayout } from './Layouts';
-import { CohortAddForm, CohortDetailsForm } from './ExtraForms';
+import {
+  CohortAddForm,
+  CohortDetailsForm,
+  ConsortiumRequestForm,
+} from './ExtraForms';
 import { combineRequestsInfo } from './utils';
 import './typedef';
 
@@ -189,6 +193,8 @@ export function UpdateResearchForm({ data }) {
     cohorts.push({ ...search, filters: JSON.parse(search.filters) });
   }
   const [showCohortDetail, setShowCohortDetail] = useState(false);
+  const [showDataRequest, setShowDataRequest] = useState(false);
+  const [selectedDataRequest, setSelectedDataRequest] = useState(null);
 
   const isSubmitAllowed =
     isEditable &&
@@ -269,6 +275,45 @@ export function UpdateResearchForm({ data }) {
                 </>
               }
             />
+            <SimpleInputField
+              label="Data Requests"
+              input={
+                <>
+                  {data.requests.map((request, i) => (
+                    <Fragment key={request.consortium}>
+                      <input
+                        value={`Consortium: ${request.consortium}`}
+                        disabled
+                        onChange={undefined}
+                        style={i > 0 ? { marginTop: '1rem' } : undefined}
+                      />
+                      <div
+                        className="data-request-form__input__action"
+                        style={{ justifyContent: 'space-between' }}
+                      >
+                        <span
+                          className="data-request-form__input__action-state"
+                          // @ts-ignore
+                          state={request.state}
+                        >
+                          {request.state.replace('_', ' ').toLowerCase()}
+                        </span>
+                        <button
+                          className="data-request-form__input__action-button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setShowDataRequest(true);
+                            setSelectedDataRequest(request);
+                          }}
+                        >
+                          See Details
+                        </button>
+                      </div>
+                    </Fragment>
+                  ))}
+                </>
+              }
+            />
           </form>
           <div className="data-request-form__button-group">
             <Button label="Back" buttonType="default" onClick={handleBack} />
@@ -289,6 +334,21 @@ export function UpdateResearchForm({ data }) {
           <CohortDetailsForm
             cohorts={cohorts}
             onClose={() => setShowCohortDetail(false)}
+          />
+        </div>
+      )}
+      {showDataRequest && (
+        <div
+          className="data-request-overlay"
+          style={{ justifyContent: 'flex-end' }}
+        >
+          <ConsortiumRequestForm
+            request={selectedDataRequest}
+            onSubmit={() => {}}
+            onClose={() => {
+              setShowDataRequest(false);
+              setSelectedDataRequest(null);
+            }}
           />
         </div>
       )}

@@ -79,6 +79,18 @@
   margin-top: 0.5rem;
 }
 
+.data-request-form__input__action-state {
+  text-transform: capitalize;
+}
+
+.data-request-form__input__action-state[state='UNDER_REVIEW'] {
+  color: var(--pcdc-color__primary);
+}
+
+.data-request-form__input__action-state[state='UPDATE_REQUESTED'] {
+  color: var(--pcdc-color__secondary);
+}
+
 .data-request-form__input__action-button {
   background: none;
   border: none;
