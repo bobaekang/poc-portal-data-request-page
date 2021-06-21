@@ -47,6 +47,29 @@ function ReviewForm({ data }) {
             label="Research Description"
             input={<textarea disabled value={data.project.description} />}
           />
+          <SimpleInputField
+            label="Principal Invesigator"
+            input={
+              <input
+                type="text"
+                disabled
+                value={`${data.researcher.first_name} ${data.researcher.last_name}`}
+              />
+            }
+          />
+          <SimpleInputField
+            label="Institution"
+            input={
+              <input type="text" disabled value={data.researcher.institution} />
+            }
+          />
+          {data.attributes.map((attr) => (
+            <SimpleInputField
+              key={attr.name}
+              label={attr.name}
+              input={<input value={attr.value} type={attr.type} disabled />}
+            />
+          ))}
           <div className="data-request-form__button-group">
             <Button label="Back" buttonType="default" onClick={handleBack} />
             <Button label="Choose Action" buttonType="secondary" />
