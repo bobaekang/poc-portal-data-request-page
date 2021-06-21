@@ -188,7 +188,8 @@ export function ConsortiumRequestForm({ request, onClose, onSubmit }) {
   for (const { id, value } of request.attributes) initialValues[id] = value;
   const [values, setValues] = useState(initialValues);
 
-  const isEditable = request.state === 'UPDATE_REQUESTED';
+  const isEditable =
+    request.state === 'NOT_SUBMITTED' || request.state === 'UPDATE_REQUESTED';
   const changedAttributes = [];
   if (isEditable)
     for (const [id, value] of Object.entries(values))
