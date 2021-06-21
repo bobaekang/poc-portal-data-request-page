@@ -13,8 +13,15 @@
   justify-content: space-between;
 }
 
+@media screen and (max-width: 810px) {
+  .data-request__header__title > h1 {
+    font-size: 28px;
+    line-height: 1.5em;
+  }
+}
+
 .data-request__header__button {
-  margin: 0.5rem 1rem;
+  margin: 0 1rem;
 }
 
 .data-request__header__date {
@@ -33,8 +40,7 @@
 
 .data-request-form__main,
 .data-request-form__extra {
-  width: 45%;
-  padding: 0 4rem;
+  width: 600px;
 }
 
 .data-request-form__extra {
@@ -43,6 +49,18 @@
   padding: 2rem;
   max-width: 600px;
   min-height: 400px;
+}
+
+@media screen and (max-width: 810px) {
+  .data-request-form__main,
+  .data-request-form__extra {
+    max-width: 95%;
+    margin: auto;
+  }
+  .data-request-form__extra {
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
 }
 
 .data-request-form__extra__title {
