@@ -106,7 +106,7 @@ CohortAddForm.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       description: PropTypes.string,
-      filters: PropTypes.arrayOf(PropTypes.object),
+      filters: PropTypes.object,
       id: PropTypes.number,
     }),
   ),
@@ -170,7 +170,7 @@ CohortDetailsForm.propTypes = {
     PropTypes.shape({
       name: PropTypes.string,
       description: PropTypes.string,
-      filters: PropTypes.arrayOf(PropTypes.object),
+      filters: PropTypes.object,
       id: PropTypes.number,
     }),
   ),
