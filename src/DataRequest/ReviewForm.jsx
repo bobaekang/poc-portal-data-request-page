@@ -72,7 +72,9 @@ function ReviewForm({ data }) {
           ))}
           <div className="data-request-form__button-group">
             <Button label="Back" buttonType="default" onClick={handleBack} />
-            <Button label="Choose Action" buttonType="secondary" />
+            {data.state === 'UNDER_REVIEW' && (
+              <Button label="Choose Action" buttonType="secondary" />
+            )}
           </div>
         </div>
       </div>
