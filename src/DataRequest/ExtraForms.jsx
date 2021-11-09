@@ -4,7 +4,7 @@ import Select from 'react-select';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
 import { createEmptyCohort, stringifyFilters } from '../ExplorerCohort/utils';
-import { ExtraFormLayout } from './Layouts';
+import { ActionFormLayout } from './Layouts';
 
 /**
  * @param {object} prop
@@ -29,7 +29,7 @@ export function CohortAddForm({ cohorts, onAddCohort, onClose }) {
     setSelected(emptyOption);
   }
   return (
-    <ExtraFormLayout title="Select a saved Cohort to add" onClose={onClose}>
+    <ActionFormLayout title="Select a saved Cohort to add" onClose={onClose}>
       <form onSubmit={(e) => e.preventDefault()}>
         <SimpleInputField
           label="Name"
@@ -71,7 +71,7 @@ export function CohortAddForm({ cohorts, onAddCohort, onClose }) {
           onClick={handleAddCohort}
         />
       </div>
-    </ExtraFormLayout>
+    </ActionFormLayout>
   );
 }
 
@@ -101,7 +101,7 @@ export function CohortDetailsForm({ cohorts, onClose }) {
   const [selected, setSelected] = useState(options[0]);
 
   return (
-    <ExtraFormLayout title="Details on a selected Cohort" onClose={onClose}>
+    <ActionFormLayout title="Details on a selected Cohort" onClose={onClose}>
       <form onSubmit={(e) => e.preventDefault()}>
         <SimpleInputField
           label="Name"
@@ -135,7 +135,7 @@ export function CohortDetailsForm({ cohorts, onClose }) {
           }
         />
       </form>
-    </ExtraFormLayout>
+    </ActionFormLayout>
   );
 }
 
@@ -177,7 +177,7 @@ export function ConsortiumRequestForm({ request, onClose, onSubmit }) {
   }
 
   return (
-    <ExtraFormLayout
+    <ActionFormLayout
       title={
         isSubmitted
           ? `Update is submitted to ${request.consortium}`
@@ -221,7 +221,7 @@ export function ConsortiumRequestForm({ request, onClose, onSubmit }) {
           />
         </div>
       )}
-    </ExtraFormLayout>
+    </ActionFormLayout>
   );
 }
 
@@ -244,7 +244,7 @@ export function ChooseActionForm({ onClose, onSubmit }) {
   }
 
   return (
-    <ExtraFormLayout
+    <ActionFormLayout
       title="Choose action for the current Data Request"
       onClose={onClose}
     >
@@ -299,7 +299,7 @@ export function ChooseActionForm({ onClose, onSubmit }) {
           onClick={handleProceedAction}
         />
       </div>
-    </ExtraFormLayout>
+    </ActionFormLayout>
   );
 }
 
