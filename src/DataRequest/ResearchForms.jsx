@@ -82,43 +82,41 @@ export function CreateResearchForm({ cohorts }) {
           <SimpleInputField
             label="Research Cohort"
             input={
-              <>
-                <Select
-                  menuIsOpen={false}
-                  components={{
-                    DropdownIndicator: () => null,
-                    IndicatorSeparator: () => null,
-                  }}
-                  isMulti
-                  isClearable
-                  isSearchable={false}
-                  value={searchValues}
-                  onChange={(_, actionMeta) => {
-                    switch (actionMeta.action) {
-                      case 'clear':
-                        setProjectData((prev) => ({ ...prev, searchIds: [] }));
-                        break;
-                      case 'remove-value':
-                        setProjectData((prev) => ({
-                          ...prev,
-                          searchIds: prev.searchIds.filter(
-                            (id) => id !== actionMeta.removedValue.value,
-                          ),
-                        }));
-                    }
-                  }}
-                />
-                <div className="data-request-form__input__action">
-                  <button
-                    className="data-request-form__input__action-button"
-                    onClick={() => setShowExtra(true)}
-                  >
-                    Add Cohort
-                  </button>
-                </div>
-              </>
+              <Select
+                menuIsOpen={false}
+                components={{
+                  DropdownIndicator: () => null,
+                  IndicatorSeparator: () => null,
+                }}
+                isMulti
+                isClearable
+                isSearchable={false}
+                value={searchValues}
+                onChange={(_, actionMeta) => {
+                  switch (actionMeta.action) {
+                    case 'clear':
+                      setProjectData((prev) => ({ ...prev, searchIds: [] }));
+                      break;
+                    case 'remove-value':
+                      setProjectData((prev) => ({
+                        ...prev,
+                        searchIds: prev.searchIds.filter(
+                          (id) => id !== actionMeta.removedValue.value,
+                        ),
+                      }));
+                  }
+                }}
+              />
             }
           />
+          <div className="data-request-form__input__action">
+            <button
+              className="data-request-form__input__action-button"
+              onClick={() => setShowExtra(true)}
+            >
+              Add Cohort
+            </button>
+          </div>
 
           <div className="data-request-form__button-group">
             <Button label="Back" buttonType="default" onClick={handleBack} />
@@ -261,59 +259,57 @@ export function UpdateResearchForm({ data }) {
                       },
                     }}
                   />
-                  <div className="data-request-form__input__action">
-                    <button
-                      className="data-request-form__input__action-button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setShowCohortDetail(true);
-                      }}
-                    >
-                      See Details
-                    </button>
-                  </div>
                 </>
               }
             />
-            <SimpleInputField
-              label="Data Requests"
-              input={
-                <>
-                  {data.requests.map((request, i) => (
-                    <Fragment key={request.consortium}>
-                      <input
-                        value={`Consortium: ${request.consortium}`}
-                        disabled
-                        onChange={undefined}
-                        style={i > 0 ? { marginTop: '1rem' } : undefined}
-                      />
-                      <div
-                        className="data-request-form__input__action"
-                        style={{ justifyContent: 'space-between' }}
-                      >
-                        <span
-                          className="data-request-form__input__action-state"
-                          // @ts-ignore
-                          state={request.state}
-                        >
-                          {request.state.replace('_', ' ').toLowerCase()}
-                        </span>
-                        <button
-                          className="data-request-form__input__action-button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setShowDataRequest(true);
-                            setSelectedDataRequest(request);
-                          }}
-                        >
-                          See Details
-                        </button>
-                      </div>
-                    </Fragment>
-                  ))}
-                </>
-              }
-            />
+            <div className="data-request-form__input__action">
+              <button
+                className="data-request-form__input__action-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowCohortDetail(true);
+                }}
+              >
+                See Details
+              </button>
+            </div>
+            {data.requests.map((request, i) => (
+              <Fragment key={request.consortium}>
+                <SimpleInputField
+                  label="Data Requests"
+                  input={
+                    <input
+                      value={`Consortium: ${request.consortium}`}
+                      disabled
+                      onChange={undefined}
+                      style={i > 0 ? { marginTop: '1rem' } : undefined}
+                    />
+                  }
+                />
+                <div
+                  className="data-request-form__input__action"
+                  style={{ justifyContent: 'space-between' }}
+                >
+                  <span
+                    className="data-request-form__input__action-state"
+                    // @ts-ignore
+                    state={request.state}
+                  >
+                    {request.state.replace('_', ' ').toLowerCase()}
+                  </span>
+                  <button
+                    className="data-request-form__input__action-button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowDataRequest(true);
+                      setSelectedDataRequest(request);
+                    }}
+                  >
+                    See Details
+                  </button>
+                </div>
+              </Fragment>
+            ))}
           </form>
           <div className="data-request-form__button-group">
             <Button label="Back" buttonType="default" onClick={handleBack} />
