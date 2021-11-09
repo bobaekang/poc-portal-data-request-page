@@ -4,33 +4,7 @@ import Select from 'react-select';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
 import { createEmptyCohort, stringifyFilters } from '../ExplorerCohort/utils';
-
-/**
- * @param {object} prop
- * @param {string} prop.title
- * @param {React.ReactNode} prop.children
- * @param {React.MouseEventHandler} prop.onClose
- */
-function ExtraFormLayout({ title, children, onClose }) {
-  return (
-    <div className="data-request-form__extra">
-      <button className="data-request-form__extra__close" onClick={onClose}>
-        ✕
-      </button>
-      <h2 className="data-request-form__extra__title">{title}</h2>
-      <div className="data-request-form__extra__body">{children}</div>
-    </div>
-  );
-}
-
-ExtraFormLayout.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  onClose: PropTypes.func,
-};
+import { ExtraFormLayout } from './Layouts';
 
 /**
  * @param {object} prop

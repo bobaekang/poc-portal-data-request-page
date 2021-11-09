@@ -106,3 +106,30 @@ FormLayout.propTypes = {
     PropTypes.node,
   ]),
 };
+
+/**
+ * @param {object} prop
+ * @param {string} prop.title
+ * @param {React.ReactNode} prop.children
+ * @param {React.MouseEventHandler} prop.onClose
+ */
+export function ExtraFormLayout({ title, children, onClose }) {
+  return (
+    <div className="data-request-form__extra">
+      <button className="data-request-form__extra__close" onClick={onClose}>
+        ✕
+      </button>
+      <h2 className="data-request-form__extra__title">{title}</h2>
+      <div className="data-request-form__extra__body">{children}</div>
+    </div>
+  );
+}
+
+ExtraFormLayout.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+  onClose: PropTypes.func,
+};
