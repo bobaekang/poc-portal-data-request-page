@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { FormLayout } from './Layouts';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
-import { ChooseActionForm } from './ExtraForms';
+import { ChooseActionForm } from './ActionForms';
 import { formatTimestamp } from './utils';
 import './typedef';
 

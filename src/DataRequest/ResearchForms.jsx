@@ -9,7 +9,7 @@ import {
   CohortAddForm,
   CohortDetailsForm,
   ConsortiumRequestForm,
-} from './ExtraForms';
+} from './ActionForms';
 import { combineRequestsInfo } from './utils';
 import './typedef';
 
