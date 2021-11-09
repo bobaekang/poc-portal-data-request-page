@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { FormLayout } from './Layouts';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
+import { ChooseActionForm } from './ExtraForms';
 import { formatTimestamp } from './utils';
 import './typedef';
 
@@ -35,6 +36,8 @@ function ReviewForm({ data }) {
       completedAt: formatTimestamp(data.completed_at),
     },
   };
+
+  const [showChooseAction, setShowChooseAction] = useState(false);
   return (
     <FormLayout header={layoutHeader}>
       <div className="data-request-form">
@@ -73,10 +76,25 @@ function ReviewForm({ data }) {
           <div className="data-request-form__button-group">
             <Button label="Back" buttonType="default" onClick={handleBack} />
             {data.state === 'UNDER_REVIEW' && (
-              <Button label="Choose Action" buttonType="secondary" />
+              <Button
+                label="Choose Action"
+                buttonType="secondary"
+                onClick={() => setShowChooseAction(true)}
+              />
             )}
           </div>
         </div>
+        {showChooseAction && (
+          <div
+            className="data-request-overlay"
+            style={{ justifyContent: 'flex-end' }}
+          >
+            <ChooseActionForm
+              onSubmit={() => {}}
+              onClose={() => setShowChooseAction(false)}
+            />
+          </div>
+        )}
       </div>
     </FormLayout>
   );
