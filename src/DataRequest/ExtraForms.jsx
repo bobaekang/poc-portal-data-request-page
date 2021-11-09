@@ -184,6 +184,8 @@ CohortDetailsForm.propTypes = {
  * @param {(attributes: *) => void} prop.onSubmit
  */
 export function ConsortiumRequestForm({ request, onClose, onSubmit }) {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const initialValues = {};
   for (const { id, value } of request.attributes) initialValues[id] = value;
   const [values, setValues] = useState(initialValues);
@@ -197,31 +199,45 @@ export function ConsortiumRequestForm({ request, onClose, onSubmit }) {
 
   function handleSubmitChange() {
     onSubmit(changedAttributes);
-    onClose();
+    setIsSubmitted(true);
   }
+
   return (
     <ExtraFormLayout
-      title={`Data Request to ${request.consortium}`}
+      title={
+        isSubmitted
+          ? `Update is submitted to ${request.consortium}`
+          : `Data Request to ${request.consortium}`
+      }
       onClose={onClose}
     >
-      <form onSubmit={(e) => e.preventDefault()}>
-        {request.attributes.map((attr) => (
-          <SimpleInputField
-            key={attr.name}
-            label={attr.name}
-            input={
-              <input
-                value={values[attr.id]}
-                disabled={!isEditable}
-                onChange={(e) =>
-                  setValues((prev) => ({ ...prev, [attr.id]: e.target.value }))
-                }
-              />
-            }
-          />
-        ))}
-      </form>
-      {isEditable && (
+      {isSubmitted ? (
+        <p className="">
+          You can send a new message to {request.consortium} on this update.
+        </p>
+      ) : (
+        <form onSubmit={(e) => e.preventDefault()}>
+          {request.attributes.map((attr) => (
+            <SimpleInputField
+              key={attr.name}
+              label={attr.name}
+              input={
+                <input
+                  value={values[attr.id]}
+                  disabled={!isEditable}
+                  onChange={(e) =>
+                    setValues((prev) => ({
+                      ...prev,
+                      [attr.id]: e.target.value,
+                    }))
+                  }
+                />
+              }
+            />
+          ))}
+        </form>
+      )}
+      {isEditable && !isSubmitted && (
         <div className="data-request-form__button-group">
           <Button
             buttonType="primary"

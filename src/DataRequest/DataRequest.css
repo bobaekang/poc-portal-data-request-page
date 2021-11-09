@@ -51,6 +51,11 @@
   min-height: 400px;
 }
 
+.data-request-form__extra__body > p {
+  margin-top: 1rem;
+  text-align: center;
+}
+
 @media screen and (max-width: 810px) {
   .data-request-form__main,
   .data-request-form__extra {
