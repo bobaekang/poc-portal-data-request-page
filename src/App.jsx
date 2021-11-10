@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DataRequest from './DataRequest';
-import {
-  ResearchCreateForm,
-  ResearchUpdateForm,
-} from './DataRequest/ResearchForms';
+import ResearchCreateForm from './DataRequest/ResearchCreateForm';
+import ResearchUpdateForm from './DataRequest/ResearchUpdateForm';
 import ReviewForm from './DataRequest/ReviewForm';
 import mockData from './mockData';
 import './App.css';
