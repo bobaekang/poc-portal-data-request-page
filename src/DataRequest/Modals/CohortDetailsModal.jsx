@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import SimpleInputField from '../../components/SimpleInputField';
 import { stringifyFilters } from '../../ExplorerCohort/utils';
-import { ModalLayout } from '../Layouts';
+import BaseModal from './BaseModal';
 
 /**
  * @param {object} prop
@@ -18,7 +18,7 @@ export default function CohortDetailsModal({ cohorts, onClose }) {
   const [selected, setSelected] = useState(options[0]);
 
   return (
-    <ModalLayout title="Details on a selected Cohort" onClose={onClose}>
+    <BaseModal title="Details on a selected Cohort" onClose={onClose}>
       <form onSubmit={(e) => e.preventDefault()}>
         <SimpleInputField
           label="Name"
@@ -52,7 +52,7 @@ export default function CohortDetailsModal({ cohorts, onClose }) {
           }
         />
       </form>
-    </ModalLayout>
+    </BaseModal>
   );
 }
 

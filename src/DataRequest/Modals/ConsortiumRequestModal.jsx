@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import SimpleInputField from '../../components/SimpleInputField';
-import { ModalLayout } from '../Layouts';
+import BaseModal from './BaseModal';
 
 /**
  * @param {object} prop
@@ -30,7 +30,7 @@ export default function ConsortiumRequestModal({ request, onClose, onSubmit }) {
   }
 
   return (
-    <ModalLayout
+    <BaseModal
       title={
         isSubmitted
           ? `Update is submitted to ${request.consortium}`
@@ -74,7 +74,7 @@ export default function ConsortiumRequestModal({ request, onClose, onSubmit }) {
           />
         </div>
       )}
-    </ModalLayout>
+    </BaseModal>
   );
 }
 

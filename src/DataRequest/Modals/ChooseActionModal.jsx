@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
-import { ModalLayout } from '../Layouts';
+import BaseModal from './BaseModal';
 
 /**
  * @param {object} prop
@@ -16,7 +16,7 @@ export default function ChooseActionModal({ onClose, onSubmit }) {
   }
 
   return (
-    <ModalLayout
+    <BaseModal
       title="Choose action for the current Data Request"
       onClose={onClose}
     >
@@ -71,7 +71,7 @@ export default function ChooseActionModal({ onClose, onSubmit }) {
           onClick={handleProceedAction}
         />
       </div>
-    </ModalLayout>
+    </BaseModal>
   );
 }
 

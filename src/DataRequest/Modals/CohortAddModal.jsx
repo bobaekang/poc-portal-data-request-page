@@ -7,7 +7,7 @@ import {
   createEmptyCohort,
   stringifyFilters,
 } from '../../ExplorerCohort/utils';
-import { ModalLayout } from '../Layouts';
+import BaseModal from './BaseModal';
 
 /**
  * @param {object} prop
@@ -32,7 +32,7 @@ export default function CohortAddForm({ cohorts, onAddCohort, onClose }) {
     setSelected(emptyOption);
   }
   return (
-    <ModalLayout title="Select a saved Cohort to add" onClose={onClose}>
+    <BaseModal title="Select a saved Cohort to add" onClose={onClose}>
       <form onSubmit={(e) => e.preventDefault()}>
         <SimpleInputField
           label="Name"
@@ -74,7 +74,7 @@ export default function CohortAddForm({ cohorts, onAddCohort, onClose }) {
           onClick={handleAddCohort}
         />
       </div>
-    </ModalLayout>
+    </BaseModal>
   );
 }
 
