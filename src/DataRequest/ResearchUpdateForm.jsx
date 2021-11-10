@@ -4,9 +4,9 @@ import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
-import { FormLayout } from './Layouts';
 import { CohortDetailsModal, ConsortiumRequestModal } from './Modals';
 import { combineRequestsInfo } from './utils';
+import './DataRequest.css';
 import './typedef';
 
 /**
@@ -30,10 +30,6 @@ export default function ResearchUpdateForm({ data }) {
     data.requests,
   );
   const isEditable = ['NOT_SUBMITTED', 'UPDATE_REQUESTED'].includes(state);
-  const layoutHeader = {
-    title: `Data Requests for Research (ID: ${data.id})`,
-    dates: { submittedAt, completedAt },
-  };
 
   const [projectData, setProjectData] = useState({
     name: data.name,
@@ -56,154 +52,167 @@ export default function ResearchUpdateForm({ data }) {
   const handleProjectSubmit = () => alert(JSON.stringify(projectData, null, 2));
 
   return (
-    <FormLayout header={layoutHeader}>
-      <div className="data-request-form">
-        <div className="data-request-form__main">
-          <form>
-            <SimpleInputField
-              label="Research Title"
-              input={
-                <input
-                  type="text"
-                  disabled={!isEditable}
-                  value={projectData.name}
-                  onChange={(e) =>
-                    setProjectData((prev) => ({
-                      ...prev,
-                      name: e.target.value,
-                    }))
-                  }
-                />
-              }
-            />
-            <SimpleInputField
-              label="Research Description"
-              input={
-                <textarea
-                  disabled={!isEditable}
-                  value={projectData.description}
-                  onChange={(e) =>
-                    setProjectData((prev) => ({
-                      ...prev,
-                      description: e.target.value,
-                    }))
-                  }
-                />
-              }
-            />
-            <SimpleInputField
-              label="Research Cohort"
-              input={
-                <>
-                  <Select
-                    menuIsOpen={false}
-                    components={{
-                      DropdownIndicator: () => null,
-                      IndicatorSeparator: () => null,
-                    }}
-                    isClearable={false}
-                    isMulti
-                    isSearchable={false}
-                    value={searchValues}
-                    styles={{
-                      multiValueLabel: (base) => {
-                        return { ...base, paddingRight: 6 };
-                      },
-                      multiValueRemove: (base) => {
-                        return { ...base, display: 'none' };
-                      },
-                    }}
+    <div className="data-request">
+      <div className="data-request__header">
+        <div className="data-request__header__title">
+          <h1>Data Requests for Research (ID: {data.id})</h1>
+        </div>
+        <p className="data-request__header__date">
+          Sumitted date: {submittedAt}
+        </p>
+        <p className="data-request__header__date">
+          Completed date: {completedAt}
+        </p>
+      </div>
+      <div className="data-request__body">
+        <div className="data-request-form">
+          <div className="data-request-form__main">
+            <form>
+              <SimpleInputField
+                label="Research Title"
+                input={
+                  <input
+                    type="text"
+                    disabled={!isEditable}
+                    value={projectData.name}
+                    onChange={(e) =>
+                      setProjectData((prev) => ({
+                        ...prev,
+                        name: e.target.value,
+                      }))
+                    }
                   />
-                </>
-              }
-            />
-            <div className="data-request-form__input__action">
-              <button
-                className="data-request-form__input__action-button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowCohortDetail(true);
-                }}
-              >
-                See Details
-              </button>
-            </div>
-            {data.requests.map((request, i) => (
-              <Fragment key={request.consortium}>
-                <SimpleInputField
-                  label="Data Requests"
-                  input={
-                    <input
-                      value={`Consortium: ${request.consortium}`}
-                      disabled
-                      onChange={undefined}
-                      style={i > 0 ? { marginTop: '1rem' } : undefined}
+                }
+              />
+              <SimpleInputField
+                label="Research Description"
+                input={
+                  <textarea
+                    disabled={!isEditable}
+                    value={projectData.description}
+                    onChange={(e) =>
+                      setProjectData((prev) => ({
+                        ...prev,
+                        description: e.target.value,
+                      }))
+                    }
+                  />
+                }
+              />
+              <SimpleInputField
+                label="Research Cohort"
+                input={
+                  <>
+                    <Select
+                      menuIsOpen={false}
+                      components={{
+                        DropdownIndicator: () => null,
+                        IndicatorSeparator: () => null,
+                      }}
+                      isClearable={false}
+                      isMulti
+                      isSearchable={false}
+                      value={searchValues}
+                      styles={{
+                        multiValueLabel: (base) => {
+                          return { ...base, paddingRight: 6 };
+                        },
+                        multiValueRemove: (base) => {
+                          return { ...base, display: 'none' };
+                        },
+                      }}
                     />
-                  }
-                />
-                <div
-                  className="data-request-form__input__action"
-                  style={{ justifyContent: 'space-between' }}
+                  </>
+                }
+              />
+              <div className="data-request-form__input__action">
+                <button
+                  className="data-request-form__input__action-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowCohortDetail(true);
+                  }}
                 >
-                  <span
-                    className="data-request-form__input__action-state"
-                    // @ts-ignore
-                    state={request.state}
+                  See Details
+                </button>
+              </div>
+              {data.requests.map((request, i) => (
+                <Fragment key={request.consortium}>
+                  <SimpleInputField
+                    label="Data Requests"
+                    input={
+                      <input
+                        value={`Consortium: ${request.consortium}`}
+                        disabled
+                        onChange={undefined}
+                        style={i > 0 ? { marginTop: '1rem' } : undefined}
+                      />
+                    }
+                  />
+                  <div
+                    className="data-request-form__input__action"
+                    style={{ justifyContent: 'space-between' }}
                   >
-                    {request.state.replace('_', ' ').toLowerCase()}
-                  </span>
-                  <button
-                    className="data-request-form__input__action-button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setShowDataRequest(true);
-                      setSelectedDataRequest(request);
-                    }}
-                  >
-                    See Details
-                  </button>
-                </div>
-              </Fragment>
-            ))}
-          </form>
-          <div className="data-request-form__button-group">
-            <Button label="Back" buttonType="default" onClick={handleBack} />
-            <Button
-              label="Submit"
-              buttonType="primary"
-              enabled={isSubmitAllowed}
-              onClick={handleProjectSubmit}
-            />
+                    <span
+                      className="data-request-form__input__action-state"
+                      // @ts-ignore
+                      state={request.state}
+                    >
+                      {request.state.replace('_', ' ').toLowerCase()}
+                    </span>
+                    <button
+                      className="data-request-form__input__action-button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowDataRequest(true);
+                        setSelectedDataRequest(request);
+                      }}
+                    >
+                      See Details
+                    </button>
+                  </div>
+                </Fragment>
+              ))}
+            </form>
+            <div className="data-request-form__button-group">
+              <Button label="Back" buttonType="default" onClick={handleBack} />
+              <Button
+                label="Submit"
+                buttonType="primary"
+                enabled={isSubmitAllowed}
+                onClick={handleProjectSubmit}
+              />
+            </div>
           </div>
         </div>
+        {showCohortDetail && (
+          <div
+            className="data-request-overlay"
+            style={{ justifyContent: 'flex-end' }}
+          >
+            <CohortDetailsModal
+              cohorts={cohorts}
+              onClose={() => setShowCohortDetail(false)}
+            />
+          </div>
+        )}
+        {showDataRequest && (
+          <div
+            className="data-request-overlay"
+            style={{ justifyContent: 'flex-end' }}
+          >
+            <ConsortiumRequestModal
+              request={selectedDataRequest}
+              onSubmit={() => {}}
+              onClose={() => {
+                setShowDataRequest(false);
+                setSelectedDataRequest(null);
+              }}
+            />
+          </div>
+        )}
       </div>
-      {showCohortDetail && (
-        <div
-          className="data-request-overlay"
-          style={{ justifyContent: 'flex-end' }}
-        >
-          <CohortDetailsModal
-            cohorts={cohorts}
-            onClose={() => setShowCohortDetail(false)}
-          />
-        </div>
-      )}
-      {showDataRequest && (
-        <div
-          className="data-request-overlay"
-          style={{ justifyContent: 'flex-end' }}
-        >
-          <ConsortiumRequestModal
-            request={selectedDataRequest}
-            onSubmit={() => {}}
-            onClose={() => {
-              setShowDataRequest(false);
-              setSelectedDataRequest(null);
-            }}
-          />
-        </div>
-      )}
-    </FormLayout>
+    </div>
   );
 }
 

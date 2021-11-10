@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import Select from 'react-select';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
-import { FormLayout } from './Layouts';
 import { CohortAddModal } from './Modals';
+import './DataRequest.css';
 import './typedef';
 
 /**
@@ -15,10 +15,6 @@ import './typedef';
 export default function ResearchCreateForm({ cohorts }) {
   const history = useHistory();
   const handleBack = () => history.push('/');
-
-  const layoutHeader = {
-    title: 'Data Requests for new Research',
-  };
 
   const [projectData, setProjectData] = useState({
     name: '',
@@ -38,110 +34,117 @@ export default function ResearchCreateForm({ cohorts }) {
   const [showExtra, setShowExtra] = useState(false);
 
   return (
-    <FormLayout header={layoutHeader}>
-      <div className="data-request-form">
-        <div className="data-request-form__main">
-          <SimpleInputField
-            label="Research Title"
-            input={
-              <input
-                type="text"
-                value={projectData.name}
-                onChange={(e) =>
-                  setProjectData((prev) => ({
-                    ...prev,
-                    name: e.target.value,
-                  }))
-                }
-              />
-            }
-          />
-          <SimpleInputField
-            label="Research Description"
-            input={
-              <textarea
-                value={projectData.description}
-                onChange={(e) =>
-                  setProjectData((prev) => ({
-                    ...prev,
-                    description: e.target.value,
-                  }))
-                }
-              />
-            }
-          />
-          <SimpleInputField
-            label="Research Cohort"
-            input={
-              <Select
-                menuIsOpen={false}
-                components={{
-                  DropdownIndicator: () => null,
-                  IndicatorSeparator: () => null,
-                }}
-                isMulti
-                isClearable
-                isSearchable={false}
-                value={searchValues}
-                onChange={(_, actionMeta) => {
-                  switch (actionMeta.action) {
-                    case 'clear':
-                      setProjectData((prev) => ({ ...prev, searchIds: [] }));
-                      break;
-                    case 'remove-value':
-                      setProjectData((prev) => ({
-                        ...prev,
-                        searchIds: prev.searchIds.filter(
-                          (id) => id !== actionMeta.removedValue.value,
-                        ),
-                      }));
-                  }
-                }}
-              />
-            }
-          />
-          <div className="data-request-form__input__action">
-            <button
-              className="data-request-form__input__action-button"
-              onClick={() => setShowExtra(true)}
-            >
-              Add Cohort
-            </button>
-          </div>
-
-          <div className="data-request-form__button-group">
-            <Button label="Back" buttonType="default" onClick={handleBack} />
-            <Button
-              label="Create"
-              buttonType="primary"
-              enabled={isCreateAllowed}
-              onClick={handleProjectCreate}
-            />
-          </div>
+    <div className="data-request">
+      <div className="data-request__header">
+        <div className="data-request__header__title">
+          <h1>Data Requests for new Research</h1>
         </div>
       </div>
-      {showExtra && (
-        <div
-          className="data-request-overlay"
-          style={{ justifyContent: 'flex-end' }}
-        >
-          <CohortAddModal
-            cohorts={cohorts.filter((cohort) => {
-              for (const id of projectData.searchIds)
-                if (id === cohort.id) return false;
-              return true;
-            })}
-            onAddCohort={(id) =>
-              setProjectData((prev) => ({
-                ...prev,
-                searchIds: [...prev.searchIds, id],
-              }))
-            }
-            onClose={() => setShowExtra(false)}
-          />
+      <div className="data-request__body">
+        <div className="data-request-form">
+          <div className="data-request-form__main">
+            <SimpleInputField
+              label="Research Title"
+              input={
+                <input
+                  type="text"
+                  value={projectData.name}
+                  onChange={(e) =>
+                    setProjectData((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }))
+                  }
+                />
+              }
+            />
+            <SimpleInputField
+              label="Research Description"
+              input={
+                <textarea
+                  value={projectData.description}
+                  onChange={(e) =>
+                    setProjectData((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
+                />
+              }
+            />
+            <SimpleInputField
+              label="Research Cohort"
+              input={
+                <Select
+                  menuIsOpen={false}
+                  components={{
+                    DropdownIndicator: () => null,
+                    IndicatorSeparator: () => null,
+                  }}
+                  isMulti
+                  isClearable
+                  isSearchable={false}
+                  value={searchValues}
+                  onChange={(_, actionMeta) => {
+                    switch (actionMeta.action) {
+                      case 'clear':
+                        setProjectData((prev) => ({ ...prev, searchIds: [] }));
+                        break;
+                      case 'remove-value':
+                        setProjectData((prev) => ({
+                          ...prev,
+                          searchIds: prev.searchIds.filter(
+                            (id) => id !== actionMeta.removedValue.value,
+                          ),
+                        }));
+                    }
+                  }}
+                />
+              }
+            />
+            <div className="data-request-form__input__action">
+              <button
+                className="data-request-form__input__action-button"
+                onClick={() => setShowExtra(true)}
+              >
+                Add Cohort
+              </button>
+            </div>
+
+            <div className="data-request-form__button-group">
+              <Button label="Back" buttonType="default" onClick={handleBack} />
+              <Button
+                label="Create"
+                buttonType="primary"
+                enabled={isCreateAllowed}
+                onClick={handleProjectCreate}
+              />
+            </div>
+          </div>
         </div>
-      )}
-    </FormLayout>
+        {showExtra && (
+          <div
+            className="data-request-overlay"
+            style={{ justifyContent: 'flex-end' }}
+          >
+            <CohortAddModal
+              cohorts={cohorts.filter((cohort) => {
+                for (const id of projectData.searchIds)
+                  if (id === cohort.id) return false;
+                return true;
+              })}
+              onAddCohort={(id) =>
+                setProjectData((prev) => ({
+                  ...prev,
+                  searchIds: [...prev.searchIds, id],
+                }))
+              }
+              onClose={() => setShowExtra(false)}
+            />
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
