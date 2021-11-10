@@ -1,46 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../components/Button';
 import './DataRequest.css';
-import { useHistory } from 'react-router-dom';
-
-/**
- * @param {object} prop
- * @param {{ title?:string; showRequestButton?:boolean; }} prop.header
- * @param {React.ReactNode} prop.children
- */
-export function TableLayout({ header, children }) {
-  const history = useHistory();
-  return (
-    <div className="data-request">
-      <div className="data-request__header">
-        <div className="data-request__header__title">
-          <h1>{header?.title || 'Data Request'}</h1>
-          {header?.showRequestButton && (
-            <Button
-              className="data-request__header__button"
-              label="Request Data"
-              onClick={() => history.push('/research-projects')}
-            />
-          )}
-        </div>
-      </div>
-      <div className="data-request__body">{children}</div>
-    </div>
-  );
-}
-
-TableLayout.propTypes = {
-  header: PropTypes.shape({
-    title: PropTypes.string,
-    showRequestButton: PropTypes.bool,
-  }).isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-};
-
 /**
  * @param {object} prop
  * @param {{ title?: string; dates?: { submittedAt: string; completedAt: string } }} prop.header

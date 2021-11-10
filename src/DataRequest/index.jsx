@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { TableLayout } from './Layouts';
 import Table from '../Table/Table';
 import Button from '../components/Button';
 import { combineRequestsInfo, formatTimestamp } from './utils';
+import './DataRequest.css';
 import './typedef';
 
 /**
@@ -135,9 +135,23 @@ function DataRequest({ user, data }) {
     : getReviewerTableProps(data, navigateTo);
 
   return (
-    <TableLayout header={{ showRequestButton: isUserResearcher }}>
-      <Table {...tableProps} />
-    </TableLayout>
+    <div className="data-request">
+      <div className="data-request__header">
+        <div className="data-request__header__title">
+          <h1>Data Request</h1>
+          {isUserResearcher && (
+            <Button
+              className="data-request__header__button"
+              label="Request Data"
+              onClick={() => navigateTo('/research-projects')}
+            />
+          )}
+        </div>
+      </div>
+      <div className="data-request__body">
+        <Table {...tableProps} />
+      </div>
+    </div>
   );
 }
 
