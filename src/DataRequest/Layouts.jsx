@@ -115,12 +115,12 @@ FormLayout.propTypes = {
  */
 export function ActionFormLayout({ title, children, onClose }) {
   return (
-    <div className="data-request-form__extra">
-      <button className="data-request-form__extra__close" onClick={onClose}>
+    <div className="data-request-form__action">
+      <button className="data-request-form__action__close" onClick={onClose}>
         ✕
       </button>
-      <h2 className="data-request-form__extra__title">{title}</h2>
-      <div className="data-request-form__extra__body">{children}</div>
+      <h2 className="data-request-form__action__title">{title}</h2>
+      <div className="data-request-form__action__body">{children}</div>
     </div>
   );
 }
