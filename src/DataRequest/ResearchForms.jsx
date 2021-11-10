@@ -6,10 +6,10 @@ import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
 import { FormLayout } from './Layouts';
 import {
-  CohortAddForm,
-  CohortDetailsForm,
-  ConsortiumRequestForm,
-} from './ActionForms';
+  CohortAddModal,
+  CohortDetailsModal,
+  ConsortiumRequestModal,
+} from './Modals';
 import { combineRequestsInfo } from './utils';
 import './typedef';
 
@@ -134,7 +134,7 @@ export function CreateResearchForm({ cohorts }) {
           className="data-request-overlay"
           style={{ justifyContent: 'flex-end' }}
         >
-          <CohortAddForm
+          <CohortAddModal
             cohorts={cohorts.filter((cohort) => {
               for (const id of projectData.searchIds)
                 if (id === cohort.id) return false;
@@ -327,7 +327,7 @@ export function UpdateResearchForm({ data }) {
           className="data-request-overlay"
           style={{ justifyContent: 'flex-end' }}
         >
-          <CohortDetailsForm
+          <CohortDetailsModal
             cohorts={cohorts}
             onClose={() => setShowCohortDetail(false)}
           />
@@ -338,7 +338,7 @@ export function UpdateResearchForm({ data }) {
           className="data-request-overlay"
           style={{ justifyContent: 'flex-end' }}
         >
-          <ConsortiumRequestForm
+          <ConsortiumRequestModal
             request={selectedDataRequest}
             onSubmit={() => {}}
             onClose={() => {

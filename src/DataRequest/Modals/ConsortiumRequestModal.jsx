@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
 import SimpleInputField from '../../components/SimpleInputField';
-import { ActionFormLayout } from '../Layouts';
+import { ModalLayout } from '../Layouts';
 
 /**
  * @param {object} prop
@@ -10,7 +10,7 @@ import { ActionFormLayout } from '../Layouts';
  * @param {() => void} prop.onClose
  * @param {(attributes: *) => void} prop.onSubmit
  */
-export default function ConsortiumRequestForm({ request, onClose, onSubmit }) {
+export default function ConsortiumRequestModal({ request, onClose, onSubmit }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const initialValues = {};
@@ -30,7 +30,7 @@ export default function ConsortiumRequestForm({ request, onClose, onSubmit }) {
   }
 
   return (
-    <ActionFormLayout
+    <ModalLayout
       title={
         isSubmitted
           ? `Update is submitted to ${request.consortium}`
@@ -74,11 +74,11 @@ export default function ConsortiumRequestForm({ request, onClose, onSubmit }) {
           />
         </div>
       )}
-    </ActionFormLayout>
+    </ModalLayout>
   );
 }
 
-ConsortiumRequestForm.propTypes = {
+ConsortiumRequestModal.propTypes = {
   request: PropTypes.object,
   onClose: PropTypes.func,
   onSubmit: PropTypes.func,

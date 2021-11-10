@@ -39,11 +39,11 @@
 }
 
 .data-request-form__main,
-.data-request-form__action {
+.data-request-modal {
   width: 600px;
 }
 
-.data-request-form__action {
+.data-request-modal {
   position: fixed;
   background-color: white;
   padding: 2rem;
@@ -51,30 +51,30 @@
   min-height: 400px;
 }
 
-.data-request-form__action__body > p {
+.data-request-modal__body > p {
   margin-top: 1rem;
   text-align: center;
 }
 
 @media screen and (max-width: 810px) {
   .data-request-form__main,
-  .data-request-form__action {
+  .data-request-modal {
     max-width: 95%;
     margin: auto;
   }
-  .data-request-form__action {
+  .data-request-modal {
     left: 50%;
     transform: translate(-50%, 0);
   }
 }
 
-.data-request-form__action__title {
+.data-request-modal__title {
   font-size: 1.2rem;
   font-weight: normal;
   text-align: center;
 }
 
-.data-request-form__action__close {
+.data-request-modal__close {
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -86,7 +86,7 @@
   width: auto;
 }
 
-.data-request-form__action__body {
+.data-request-modal__body {
   min-height: calc(400px - 4rem - 38px);
   display: flex;
   flex-direction: column;

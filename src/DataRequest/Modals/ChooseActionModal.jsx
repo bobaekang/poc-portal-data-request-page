@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../../components/Button';
-import { ActionFormLayout } from '../Layouts';
+import { ModalLayout } from '../Layouts';
 
 /**
  * @param {object} prop
  * @param {() => void} prop.onClose
  * @param {(actionType: ReviewerActionType) => void} prop.onSubmit
  */
-export default function ChooseActionForm({ onClose, onSubmit }) {
+export default function ChooseActionModal({ onClose, onSubmit }) {
   const [actionType, setActionType] = useState(null);
   function handleProceedAction() {
     onSubmit(actionType);
@@ -16,7 +16,7 @@ export default function ChooseActionForm({ onClose, onSubmit }) {
   }
 
   return (
-    <ActionFormLayout
+    <ModalLayout
       title="Choose action for the current Data Request"
       onClose={onClose}
     >
@@ -71,11 +71,11 @@ export default function ChooseActionForm({ onClose, onSubmit }) {
           onClick={handleProceedAction}
         />
       </div>
-    </ActionFormLayout>
+    </ModalLayout>
   );
 }
 
-ChooseActionForm.propTypes = {
+ChooseActionModal.propTypes = {
   onClose: PropTypes.func,
   onSubmit: PropTypes.func,
 };

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { FormLayout } from './Layouts';
 import Button from '../components/Button';
 import SimpleInputField from '../components/SimpleInputField';
-import { ChooseActionForm } from './ActionForms';
+import { ChooseActionModal } from './Modals';
 import { formatTimestamp } from './utils';
 import './typedef';
 
@@ -89,7 +89,7 @@ function ReviewForm({ data }) {
             className="data-request-overlay"
             style={{ justifyContent: 'flex-end' }}
           >
-            <ChooseActionForm
+            <ChooseActionModal
               onSubmit={() => {}}
               onClose={() => setShowChooseAction(false)}
             />

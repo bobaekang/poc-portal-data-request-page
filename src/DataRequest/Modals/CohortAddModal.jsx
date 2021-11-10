@@ -1,30 +1,44 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import Button from '../../components/Button';
 import SimpleInputField from '../../components/SimpleInputField';
-import { stringifyFilters } from '../../ExplorerCohort/utils';
-import { ActionFormLayout } from '../Layouts';
+import {
+  createEmptyCohort,
+  stringifyFilters,
+} from '../../ExplorerCohort/utils';
+import { ModalLayout } from '../Layouts';
 
 /**
  * @param {object} prop
  * @param {ExplorerCohort[]} prop.cohorts
+ * @param {(id: number) => void} prop.onAddCohort
  * @param {() => void} prop.onClose
  */
-export default function CohortDetailsForm({ cohorts, onClose }) {
+export default function CohortAddForm({ cohorts, onAddCohort, onClose }) {
+  const emptyOption = {
+    label: 'Open New (no cohort)',
+    value: createEmptyCohort(),
+  };
   const options = cohorts.map((cohort) => ({
     label: cohort.name,
     value: cohort,
   }));
-  const [selected, setSelected] = useState(options[0]);
+  const [selected, setSelected] = useState(emptyOption);
+  const isAddAllowed = selected.value.name !== emptyOption.value.name;
 
+  function handleAddCohort() {
+    onAddCohort(selected.value.id);
+    setSelected(emptyOption);
+  }
   return (
-    <ActionFormLayout title="Details on a selected Cohort" onClose={onClose}>
+    <ModalLayout title="Select a saved Cohort to add" onClose={onClose}>
       <form onSubmit={(e) => e.preventDefault()}>
         <SimpleInputField
           label="Name"
           input={
             <Select
-              options={options}
+              options={[emptyOption, ...options]}
               value={selected}
               clearable={false}
               onChange={(e) => setSelected(e)}
@@ -52,11 +66,19 @@ export default function CohortDetailsForm({ cohorts, onClose }) {
           }
         />
       </form>
-    </ActionFormLayout>
+      <div className="data-request-form__button-group">
+        <Button
+          buttonType="secondary"
+          enabled={isAddAllowed}
+          label="Add Cohort"
+          onClick={handleAddCohort}
+        />
+      </div>
+    </ModalLayout>
   );
 }
 
-CohortDetailsForm.propTypes = {
+CohortAddForm.propTypes = {
   cohorts: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
@@ -65,5 +87,6 @@ CohortDetailsForm.propTypes = {
       id: PropTypes.number,
     }),
   ),
+  onAddCohort: PropTypes.func,
   onClose: PropTypes.func,
 };
