@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import DataRequest from './DataRequest';
 import {
-  CreateResearchForm,
-  UpdateResearchForm,
+  ResearchCreateForm,
+  ResearchUpdateForm,
 } from './DataRequest/ResearchForms';
 import ReviewForm from './DataRequest/ReviewForm';
 import mockData from './mockData';
@@ -45,7 +45,7 @@ function App() {
             if (userType === 'researcher')
               for (const project of researcherData.projects)
                 if (project.id === parseInt(match.params.id))
-                  return <UpdateResearchForm data={project} />;
+                  return <ResearchUpdateForm data={project} />;
 
             return <Redirect to="/" />;
           }}
@@ -54,7 +54,7 @@ function App() {
           path="/research-projects"
           render={() =>
             userType === 'researcher' ? (
-              <CreateResearchForm cohorts={parsedCohorts} />
+              <ResearchCreateForm cohorts={parsedCohorts} />
             ) : (
               <Redirect to="/" />
             )

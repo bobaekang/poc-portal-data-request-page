@@ -21,7 +21,7 @@ import './typedef';
  * @property {ExplorerCohort[]} cohorts
  */
 
-export function CreateResearchForm({ cohorts }) {
+export function ResearchCreateForm({ cohorts }) {
   const history = useHistory();
   const handleBack = () => history.push('/');
 
@@ -167,7 +167,7 @@ export function CreateResearchForm({ cohorts }) {
  * @param {object} prop
  * @param {DataRequestUpdateResearchData} prop.data
  */
-export function UpdateResearchForm({ data }) {
+export function ResearchUpdateForm({ data }) {
   const history = useHistory();
   const handleBack = () => history.push('/');
 
@@ -352,6 +352,6 @@ export function UpdateResearchForm({ data }) {
   );
 }
 
-UpdateResearchForm.propTypes = {
+ResearchUpdateForm.propTypes = {
   data: PropTypes.object,
 };
